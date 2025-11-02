@@ -14,6 +14,7 @@
     --text-light: #9ca3af;
     --text-dark: #ffffff;
 }
+
 @font-face {
   font-family: 'DKfont';
   src: url('font/DkFont-Regular.otf') format('opentype');
@@ -368,7 +369,6 @@ body {
 }
 
 .logo {
-    font-family: 'DKfont', sans-serif;
     font-weight: 700;
     font-size: 20px;
     letter-spacing: 2px;
@@ -380,49 +380,9 @@ body {
     align-items: center;
 }
 
-
-/* Light mode styles */
-body.light-mode {
-    --bg-dark: #f8fafc;
-    --bg-light: #ffffff;
-    --text-dark: #1e293b;
-    --text-light: #64748b;
-    --border-color: #e2e8f0;
-}
-
-body.light-mode .main-portfolio {
-    background-color: #f8fafc;
-}
-
-body.light-mode .hero,
-body.light-mode .about-section,
-body.light-mode .portfolio-section {
-    background-color: #f8fafc;
-}
-
-body.light-mode .header {
-    background-color: #ffffff;
-    border-bottom-color: #e2e8f0;
-}
-
-body.light-mode .stat-card,
-body.light-mode .category-card,
-body.light-mode .tech-item,
-body.light-mode .tab-button {
-    background: rgba(255, 255, 255, 0.8);
-    border-color: #e2e8f0;
-}
-
-body.light-mode .stat-card:hover,
-body.light-mode .category-card:hover,
-body.light-mode .tech-item:hover {
-    background: white;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-}
-
 /* Hero Section */
 .hero {
-    min-height: 90dvh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     padding: 60px 5% 40px;
@@ -534,13 +494,6 @@ body.light-mode .tech-item:hover {
 }
 
 /* Typing Effect */
-.typewriter-text {
-  font-family: 'Dymonfont', cursive;
-  font-size: 36px;
-  font-weight: 700;
-  color: var(--primary-color);
-}
-
 .typing-container {
     height: 32px;
     display: flex;
@@ -763,7 +716,7 @@ body.light-mode .tech-item:hover {
 
 .avatar-container {
     position: relative;
-    width: 70%;
+    width: 100%;
     opacity: 0.9;
     transform: scale(1.4);
     transition: transform 0.5s ease;
@@ -796,7 +749,7 @@ body.light-mode .tech-item:hover {
 }
 
 .lottie-placeholder img {
-    width: 80%;
+    width: 50%;
     height: 80%;
     object-fit: contain;
     filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.3));
@@ -882,7 +835,6 @@ body.light-mode .tech-item:hover {
 }
 
 /* About Grid */
-
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -932,7 +884,7 @@ body.light-mode .tech-item:hover {
     border-radius: 16px;
     padding: 24px;
     backdrop-filter: blur(10px);
-    overflow: visible;
+    overflow: hidden;
 }
 
 .quote-orb {
@@ -1445,14 +1397,39 @@ body.light-mode .tech-item:hover {
 }
 
 /* Projects/Certificates Grid */
+.projects-grid,
 .certificates-grid {
+    min-height: 200px;
+    padding: 40px 0;
+}
+.project-container,
+.certificate-container {
+    display: flex;
+    gap: 20px;
+    flex-direction: row-reverse;
+}
+
+.project-item,
+.certificate-item {
+    flex-grow: 1;
     min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px dashed rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-    padding: 60px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-light);
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.project-item:hover,
+.certificate-item:hover {
+    border-color: var(--primary-color);
+    background: rgba(99, 102, 241, 0.1);
+    transform: translateY(-4px);
 }
 
 .placeholder-text {
@@ -1503,15 +1480,60 @@ body.light-mode .tech-item:hover {
 .tech-icon-placeholder svg {
     width: 40px;
     height: 40px;
-    color: var(--primary-color);
+}
+
+/* Tech Stack Specific Colors */
+.tech-icon-html svg {
+    color: #E34F26;
+}
+
+.tech-icon-css svg {
+    color: #1572B6;
+}
+
+.tech-icon-js svg {
+    color: #F7DF1E;
+}
+
+.tech-icon-tailwind svg {
+    color: #06B6D4;
+}
+
+.tech-icon-react svg {
+    color: #61DAFB;
+}
+
+.tech-icon-node svg {
+    color: #339933;
 }
 
 .tech-item:hover .tech-icon-placeholder {
     transform: scale(1.1) rotate(5deg);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
 }
 
-.tech-item:hover .tech-icon-placeholder svg {
-    color: var(--secondary-color);
+.tech-item:hover .tech-icon-html svg {
+    color: #F06529;
+}
+
+.tech-item:hover .tech-icon-css svg {
+    color: #33A9DC;
+}
+
+.tech-item:hover .tech-icon-js svg {
+    color: #F7E018;
+}
+
+.tech-item:hover .tech-icon-tailwind svg {
+    color: #38BDF8;
+}
+
+.tech-item:hover .tech-icon-react svg {
+    color: #00D8FF;
+}
+
+.tech-item:hover .tech-icon-node svg {
+    color: #68A063;
 }
 
 .tech-item img {
@@ -1669,4 +1691,7 @@ body.light-mode .tech-item:hover {
         font-size: 16px;
     }
 
+    .nav {
+        gap: 12px;
+    }
 }
