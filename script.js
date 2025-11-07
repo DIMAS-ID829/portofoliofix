@@ -233,6 +233,19 @@ tabButtons.forEach(button => {
 });
 
 // ============================================
+// PROJECT CARDS HOVER ANIMATION
+// ============================================
+const cards = document.querySelectorAll('.project-card, .c1, .service-card, .category-card');
+cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px) scale(1.05)';
+    });
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// ============================================
 // CONSOLE MESSAGE
 // ============================================
 console.log('%c👋 Welcome to Dimas ID Portfolio!', 'color: #6366f1; font-size: 20px; font-weight: bold;');
@@ -305,6 +318,145 @@ function copyToClipboard(text) {
         console.error('Failed to copy:', err);
     });
 }
+
+// ============================================
+// SMOOTH SCROLL BEHAVIOR
+// ============================================
+// Add smooth scrolling behavior to all internal links
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            const offsetTop = targetSection.offsetTop - 80; // Account for fixed header
+            
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// ============================================
+// ACTIVE SECTION HIGHLIGHTING (Optional)
+// ============================================
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+
+function highlightActiveSection() {
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
+// Throttle scroll event for performance
+window.addEventListener('scroll', throttle(highlightActiveSection, 100));
+
+// ============================================
+// DYNAMIC YEAR FOR FOOTER (if you add one)
+// ============================================
+const yearElement = document.querySelector('.current-year');
+if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+}
+
+// ============================================
+// PRELOADER (Optional)
+// ============================================
+window.addEventListener('load', () => {
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+        setTimeout(() => {
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }, 1000);
+    }
+});
+
+// ============================================
+// BACK TO TOP BUTTON (Optional Enhancement)
+// ============================================
+const backToTopButton = document.createElement('button');
+backToTopButton.innerHTML = '↑';
+backToTopButton.className = 'back-to-top';
+backToTopButton.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+`;
+
+document.body.appendChild(backToTopButton);
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopButton.style.opacity = '1';
+        backToTopButton.style.visibility = 'visible';
+    } else {
+        backToTopButton.style.opacity = '0';
+        backToTopButton.style.visibility = 'hidden';
+    }
+});
+
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+backToTopButton.addEventListener('mouseenter', () => {
+    backToTopButton.style.transform = 'scale(1.1) translateY(-5px)';
+});
+
+backToTopButton.addEventListener('mouseleave', () => {
+    backToTopButton.style.transform = 'scale(1) translateY(0)';
+});
+
+// ============================================
+// LOADING ANIMATION FOR IMAGES
+// ============================================
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('load', function() {
+        this.style.opacity = '1';
+    });
+    
+    // Set initial opacity
+    if (!img.complete) {
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.5s ease';
+    }
+});
 
 // ============================================
 // EXPORT FUNCTIONS (if using modules)
